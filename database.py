@@ -107,6 +107,15 @@ def list_history() -> list[dict]:
     return [dict(r) for r in rows]
 
 
+def delete_history(record_id: str) -> bool:
+    conn = get_connection()
+    cursor = conn.execute("DELETE FROM history WHERE id = ?", (record_id,))
+    conn.commit()
+    deleted = cursor.rowcount > 0
+    conn.close()
+    return deleted
+
+
 def get_pdf(record_id: str) -> bytes | None:
     conn = get_connection()
     row = conn.execute("SELECT pdf_blob FROM history WHERE id = ?", (record_id,)).fetchone()

@@ -132,6 +132,15 @@ textarea {
     background: #f0f0f0;
 }
 
+.danger-btn {
+    color: #cc0000;
+    border-color: #ffcccc;
+}
+
+.danger-btn:hover {
+    background: #fff5f5;
+}
+
 .hidden {
     display: none !important;
 }

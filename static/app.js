@@ -243,6 +243,7 @@ async function loadHistory() {
                 <div class="history-actions">
                     ${linkHtml}
                     <button class="secondary-btn" onclick="downloadPdf('${item.id}')">Download PDF</button>
+                    <button class="secondary-btn danger-btn" onclick="deleteHistory('${item.id}')">Delete</button>
                 </div>
             `;
             container.appendChild(div);
@@ -254,6 +255,21 @@ async function loadHistory() {
 
 function downloadPdf(id) {
     window.open(`/api/history/${id}/pdf`, "_blank");
+}
+
+async function deleteHistory(id) {
+    if (!confirm("Are you sure you want to delete this entry?")) return;
+
+    try {
+        const res = await fetch(`/api/history/${id}`, { method: "DELETE" });
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail || "Delete failed");
+        }
+        loadHistory();
+    } catch (e) {
+        showError(e.message);
+    }
 }
 
 function showError(message) {

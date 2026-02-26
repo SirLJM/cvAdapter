@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from config import CV_VERSIONS, CV_LANGUAGES
-from database import init_db, save_history, list_history, get_pdf
+from database import init_db, save_history, list_history, get_pdf, delete_history
 from models import AnalyzeRequest, FinalizeRequest
 from services import load_cv, analyze_cv, apply_changes, generate_pdf
 
@@ -103,6 +103,13 @@ async def history_pdf(record_id: str):
         media_type="application/pdf",
         headers={"Content-Disposition": f'attachment; filename="cv_{record_id[:8]}.pdf"'},
     )
+
+
+@app.delete("/api/history/{record_id}")
+async def delete_history_record(record_id: str):
+    if not delete_history(record_id):
+        raise HTTPException(404, "Record not found")
+    return {"ok": True}
 
 
 @app.get("/")

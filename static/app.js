@@ -115,14 +115,34 @@ function renderDiff(result) {
                 </div>
                 <div class="change-adapted">
                     <div class="change-label">Adapted</div>
-                    ${escapeHtml(String(change.adapted_value))}
+                    <textarea class="adapted-edit" data-index="${idx}" data-path="${change.field_path}">${escapeHtml(String(change.adapted_value))}</textarea>
                 </div>
             </div>
         `;
         container.appendChild(card);
+
+        card.querySelector(".adapted-edit").addEventListener("input", (e) => {
+            const val = e.target.value;
+            result.changes[idx].adapted_value = val;
+            setNested(result.adapted_data[result.language], change.field_path, val);
+        });
     });
 
     document.getElementById("results").classList.remove("hidden");
+}
+
+function setNested(obj, path, value) {
+    const keys = path.split(".");
+    let current = obj;
+    for (let i = 0; i < keys.length - 1; i++) {
+        current = Array.isArray(current) ? current[parseInt(keys[i])] : current[keys[i]];
+    }
+    const last = keys[keys.length - 1];
+    if (Array.isArray(current)) {
+        current[parseInt(last)] = value;
+    } else {
+        current[last] = value;
+    }
 }
 
 function escapeHtml(text) {
@@ -187,7 +207,7 @@ async function finalize() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `cv_adapted.pdf`;
+        a.download = "Łukasz Wiśniewski.pdf";
         a.click();
         URL.revokeObjectURL(url);
 

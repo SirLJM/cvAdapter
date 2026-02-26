@@ -82,7 +82,7 @@ async def finalize(request: FinalizeRequest):
         content=pdf_bytes,
         media_type="application/pdf",
         headers={
-            "Content-Disposition": f'attachment; filename="cv_adapted_{record_id[:8]}.pdf"',
+            "Content-Disposition": "attachment; filename*=UTF-8''%C5%81ukasz%20Wi%C5%9Bniewski.pdf",
             "X-History-Id": record_id,
         },
     )
@@ -101,7 +101,7 @@ async def history_pdf(record_id: str):
     return Response(
         content=pdf_bytes,
         media_type="application/pdf",
-        headers={"Content-Disposition": f'attachment; filename="cv_{record_id[:8]}.pdf"'},
+        headers={"Content-Disposition": "attachment; filename*=UTF-8''%C5%81ukasz%20Wi%C5%9Bniewski.pdf"},
     )
 
 

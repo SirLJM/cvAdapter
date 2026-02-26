@@ -250,6 +250,28 @@ textarea {
     color: #006400;
 }
 
+.adapted-edit {
+    width: 100%;
+    min-height: 60px;
+    background: transparent;
+    border: 1px solid #c3e6c3;
+    border-radius: 4px;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 6px 8px;
+    resize: vertical;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.adapted-edit:focus {
+    outline: none;
+    border-color: #006400;
+    background: #fff;
+}
+
 .change-label {
     font-size: 0.7rem;
     font-weight: 700;

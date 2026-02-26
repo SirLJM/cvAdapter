@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Adapter - ATS Optimization</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CV Adapter</h1>
+            <p class="subtitle">ATS-optimized CV generation</p>
+            <nav>
+                <button class="nav-btn active" data-view="analyze">Analyze</button>
+                <button class="nav-btn" data-view="history">History</button>
+            </nav>
+        </header>
+
+        <main id="analyze-view">
+            <section class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="version">CV Version</label>
+                        <select id="version"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Language</label>
+                        <select id="language"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="job-description">Job Description</label>
+                    <textarea id="job-description" rows="10" placeholder="Paste the full job description here..."></textarea>
+                </div>
+                <button id="analyze-btn" class="primary-btn">Analyze & Adapt</button>
+            </section>
+
+            <section id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing job description and adapting CV...</p>
+            </section>
+
+            <section id="results" class="hidden">
+                <div class="results-header">
+                    <h2>Proposed Changes for: <span id="job-title"></span></h2>
+                    <div class="results-actions">
+                        <button id="select-all-btn" class="secondary-btn">Select All</button>
+                        <button id="deselect-all-btn" class="secondary-btn">Deselect All</button>
+                    </div>
+                </div>
+                <div id="changes-list"></div>
+
+                <div class="application-tracker">
+                    <h3>Application Tracking (optional)</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company-name">Company</label>
+                            <input type="text" id="company-name" placeholder="Company name">
+                        </div>
+                        <div class="form-group">
+                            <label for="position-title">Position</label>
+                            <input type="text" id="position-title" placeholder="Position title">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="application-date">Date</label>
+                            <input type="date" id="application-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="offer-link">Offer Link</label>
+                            <input type="url" id="offer-link" placeholder="https://...">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="finalize-btn" class="primary-btn">Generate PDF</button>
+            </section>
+
+            <section id="generating" class="hidden">
+                <div class="spinner"></div>
+                <p>Generating PDF...</p>
+            </section>
+        </main>
+
+        <main id="history-view" class="hidden">
+            <h2>Adaptation History</h2>
+            <div id="history-list"></div>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /c/WORKSPACE/github.com/cvAdapter && python -c \"import py_compile; [py_compile.compile\\(f, doraise=True\\) for f in ['config.py', 'models.py', 'database.py', 'prompts.py', 'services.py', 'main.py']]\" 2>&1)"
+    ]
+  }
+}
